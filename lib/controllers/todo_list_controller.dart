@@ -7,33 +7,25 @@ import '/models/todo.dart';
 final todoListProvider = ChangeNotifierProvider<TodoListController>(
   (ref) {
     // 他の provider の値を参照する場合の書き方
+    // settingsProvider から通知が来たらその変更を反映する
     final color = ref.watch(settingsProvider).color;
 
     // 初期化処理を書く場合の書き方
-    return TodoListController(color: color).._init();
+    return TodoListController(color: color);
   },
 );
 
 class TodoListController extends ChangeNotifier {
-  TodoListController({required this.color}) {
-    // 初期化処理はこっちに書いてもよい
-    // _init();
-  }
+  TodoListController({required this.color});
 
   final Color color;
-  final List<Todo> todoList = <Todo>[];
-
-  /// 初期化処理。Todo リストを fetch してくる。
-  Future<void> _init() async {
-    todoList.addAll(await TodoRepository.instance.fetchTodoList());
-    notifyListeners();
-  }
+  Future<List<Todo>> get todoList => TodoRepository.instance.fetchTodoList();
 
   Future<void> addTodo(BuildContext context) async {
     String? description;
 
     // お行儀が悪いですがコントローラーの中で
-    // context をつかってダイアログを表示しています。
+    // context をつかってダイアログをひらいています。
     final ret = await showDialog<bool?>(
       context: context,
       builder: (context) {
@@ -52,13 +44,13 @@ class TodoListController extends ChangeNotifier {
       },
     );
     if (ret == true) {
-      todoList.add(Todo.create(description: description!));
+      TodoRepository.instance.addTodo(Todo.create(description: description!));
       notifyListeners();
     }
   }
 
   void removeTodo(Todo todo) {
-    todoList.remove(todo);
+    TodoRepository.instance.removeTodo(todo);
     notifyListeners();
   }
 }

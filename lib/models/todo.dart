@@ -30,12 +30,23 @@ class TodoRepository {
   TodoRepository._();
   static TodoRepository instance = TodoRepository._();
 
+  final List<Todo> _todoList = [
+    Todo.create(description: '掃除'),
+    Todo.create(description: '洗濯'),
+    Todo.create(description: 'flutter'),
+  ];
+
+  void addTodo(Todo todo) {
+    _todoList.add(todo);
+  }
+
+  void removeTodo(Todo todo) {
+    _todoList.remove(todo);
+  }
+
+  /// あえて時間のかかる処理にしています
   Future<List<Todo>> fetchTodoList() async {
-    final todoList = <Todo>[]..add(Todo.create(description: '掃除'));
-    await Future<void>.delayed(const Duration(milliseconds: 500));
-    todoList.add(Todo.create(description: '洗濯'));
-    await Future<void>.delayed(const Duration(milliseconds: 500));
-    todoList.add(Todo.create(description: 'flutter'));
-    return todoList;
+    await Future<void>.delayed(const Duration(milliseconds: 1000));
+    return _todoList;
   }
 }
