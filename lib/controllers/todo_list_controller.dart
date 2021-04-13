@@ -10,7 +10,6 @@ final todoListProvider = ChangeNotifierProvider<TodoListController>(
     // settingsProvider から通知が来たらその変更を反映する
     final color = ref.watch(settingsProvider).color;
 
-    // 初期化処理を書く場合の書き方
     return TodoListController(color: color);
   },
 );
