@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () => CounterListPage.show(context),
-              child: const Text('カウンター'),
+              child: const Text('Counter'),
             ),
             ElevatedButton(
               onPressed: () => TodoListPage.show(context),

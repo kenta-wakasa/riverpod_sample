@@ -21,7 +21,7 @@ class CounterListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('カウンター'),
+        title: const Text('Counter'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
