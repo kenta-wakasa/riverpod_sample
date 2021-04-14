@@ -30,7 +30,7 @@ class CounterDetailsPage extends StatelessWidget {
         child: const Icon(Icons.add_rounded),
       ),
       body: Consumer(
-        builder: (context, watch, child) {
+        builder: (_, watch, __) {
           final count = watch(counterProvider(index)).count;
           return Center(
             child: Text(

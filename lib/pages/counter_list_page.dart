@@ -32,7 +32,7 @@ class CounterListPage extends StatelessWidget {
               onTap: () => CounterDetailsPage.show(context, index),
               leading: Text('index:$index'),
               title: Consumer(
-                builder: (context, watch, child) {
+                builder: (_, watch, __) {
                   // family を使った場合は counterProvider(index) のような形でパラメータを渡す
                   final count = watch(counterProvider(index)).count;
                   return Text('$count');
