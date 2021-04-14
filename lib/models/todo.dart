@@ -12,6 +12,7 @@ class Todo {
       : createdAt = DateTime.now(),
         done = false;
 
+
   /// [Todo]の説明
   final String description;
 
@@ -22,6 +23,8 @@ class Todo {
   /// このサンプルでは使用されていない。
   final bool done;
 
+
+  /// これも今回は使ってないです。
   Todo copyWith({DateTime? createdAt, String? description, bool? done}) {
     return Todo(
       createdAt: createdAt ?? this.createdAt,
