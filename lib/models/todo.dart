@@ -57,6 +57,6 @@ class TodoRepository {
   /// 指定した[Todo]を追加する。
   void add(Todo todo) => _todoList.add(todo);
 
-  /// 指定した[Todo]を追加する。
+  /// 指定した[Todo]を削除する。
   void remove(Todo todo) => _todoList.remove(todo);
 }
