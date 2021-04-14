@@ -7,19 +7,17 @@ final settingsProvider = ChangeNotifierProvider(
   (ref) => SettingsController._(),
 );
 
+/// 色を変えるためだけのコントローラー
 class SettingsController extends ChangeNotifier {
   SettingsController._();
-  Color color = Colors.green;
+
+  Color color = Colors.red;
+  final random = Random();
+  int get randomByte => random.nextInt(256);
 
   /// ランダムな色を生成する
   void changeColor() {
-    final random = Random();
-    color = Color.fromARGB(
-      255,
-      random.nextInt(256),
-      random.nextInt(256),
-      random.nextInt(256),
-    );
+    color = Color.fromARGB(255, randomByte, randomByte, randomByte);
     notifyListeners();
   }
 }

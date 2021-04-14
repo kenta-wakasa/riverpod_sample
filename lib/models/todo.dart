@@ -12,8 +12,14 @@ class Todo {
       : createdAt = DateTime.now(),
         done = false;
 
-  final DateTime createdAt;
+  /// [Todo]の説明
   final String description;
+
+  /// [Todo]を生成した時間。
+  /// Id として活用している。
+  final DateTime createdAt;
+
+  /// このサンプルでは使用されていない。
   final bool done;
 
   Todo copyWith({DateTime? createdAt, String? description, bool? done}) {
@@ -26,28 +32,28 @@ class Todo {
 }
 
 class TodoRepository {
-  
-  // 簡単なシングルトンを作る方法
+  // 簡易的にシングルトンを作る方法。
   TodoRepository._();
   static TodoRepository instance = TodoRepository._();
 
+  /// ここにあるデータがデータベースにあるイメージです。
   final List<Todo> _todoList = [
     Todo.create(description: '掃除'),
     Todo.create(description: '洗濯'),
     Todo.create(description: 'flutter'),
   ];
 
-  void addTodo(Todo todo) {
-    _todoList.add(todo);
-  }
-
-  void removeTodo(Todo todo) {
-    _todoList.remove(todo);
-  }
-
-  // 擬似的な通信を表現するために、あえて時間のかかる処理にしています
+  /// [_todoList] を取得する。
+  /// 擬似的な通信を表現するために、あえて時間のかかる処理にしています。
   Future<List<Todo>> fetchTodoList() async {
+    // Future.delayed を使うと簡単に〇〇秒待つといった処理がかけます。
     await Future<void>.delayed(const Duration(milliseconds: 1000));
     return _todoList;
   }
+
+  /// 指定した[Todo]を追加する。
+  void add(Todo todo) => _todoList.add(todo);
+
+  /// 指定した[Todo]を追加する。
+  void remove(Todo todo) => _todoList.remove(todo);
 }
