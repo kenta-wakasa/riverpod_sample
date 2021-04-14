@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final settingsProvider = ChangeNotifierProvider(
-  (ref) => SettingsController(),
+  (ref) => SettingsController._(),
 );
 
 class SettingsController extends ChangeNotifier {
-  SettingsController();
+  SettingsController._();
   Color color = Colors.green;
 
+  /// ランダムな色を生成する
   void changeColor() {
     final random = Random();
     color = Color.fromARGB(

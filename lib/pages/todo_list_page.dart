@@ -33,6 +33,7 @@ class TodoListPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ElevatedButton(
+              // メソッドを使いたいだけなら context.read で呼ぶとよい。
               onPressed: context.read(settingsProvider).changeColor,
               child: const Text('いろを変える'),
             ),
@@ -50,9 +51,13 @@ class TodoListPage extends ConsumerWidget {
           BuildContext context,
           AsyncSnapshot<List<Todo>> snapshot,
         ) {
+
+          // 値が取得できていない間はこれが呼ばれる
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
+
+          // 値が取得できるとこれ以降が自動的に呼ばれる
           final todoList = snapshot.data;
           return ListView.builder(
             itemCount: todoList!.length,

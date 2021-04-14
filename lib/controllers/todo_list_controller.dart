@@ -10,12 +10,12 @@ final todoListProvider = ChangeNotifierProvider<TodoListController>(
     // settingsProvider から通知が来たらその変更を反映する
     final color = ref.watch(settingsProvider).color;
 
-    return TodoListController(color: color);
+    return TodoListController._(color: color);
   },
 );
 
 class TodoListController extends ChangeNotifier {
-  TodoListController({required this.color});
+  TodoListController._({required this.color});
 
   final Color color;
 
