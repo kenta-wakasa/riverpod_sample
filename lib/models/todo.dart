@@ -26,6 +26,7 @@ class Todo {
 }
 
 class TodoRepository {
+  
   // 簡単なシングルトンを作る方法
   TodoRepository._();
   static TodoRepository instance = TodoRepository._();
@@ -44,7 +45,7 @@ class TodoRepository {
     _todoList.remove(todo);
   }
 
-  /// あえて時間のかかる処理にしています
+  // 擬似的な通信を表現するために、あえて時間のかかる処理にしています
   Future<List<Todo>> fetchTodoList() async {
     await Future<void>.delayed(const Duration(milliseconds: 1000));
     return _todoList;

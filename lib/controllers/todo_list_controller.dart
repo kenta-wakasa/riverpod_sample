@@ -18,6 +18,9 @@ class TodoListController extends ChangeNotifier {
   TodoListController({required this.color});
 
   final Color color;
+
+  // todoList　はここから 取得しています
+  // ページ側では、ついでに FutureBuilder のサンプルも書いています。
   Future<List<Todo>> get todoList => TodoRepository.instance.fetchTodoList();
 
   Future<void> addTodo(BuildContext context) async {
@@ -25,7 +28,8 @@ class TodoListController extends ChangeNotifier {
 
     // お行儀が悪いですがコントローラーの中で
     // context をつかってダイアログをひらいています。
-    final ret = await showDialog<bool?>(
+    // ダイアログの中で TextFormField を使う参考になればと思います。
+    final result = await showDialog<bool?>(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -42,7 +46,7 @@ class TodoListController extends ChangeNotifier {
         );
       },
     );
-    if (ret == true) {
+    if (result == true) {
       TodoRepository.instance.addTodo(Todo.create(description: description!));
       notifyListeners();
     }
